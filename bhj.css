@@ -52,3 +52,10 @@ body
 	font-size: 8pt;
 }
 
+#bottom
+{
+	display: inline-block;
+	font-variant: small-caps;
+	min-width: 100vw;
+	padding: 4px;
+}
