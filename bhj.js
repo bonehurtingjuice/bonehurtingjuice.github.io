@@ -7,3 +7,8 @@ catch (e)
 {
 }
 
+document.onload = function(event)
+{
+	top.postMessage(document.documentElement.clientHeight);
+};
+
