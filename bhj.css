@@ -1,10 +1,54 @@
+@import url("https://fonts.googleapis.com/css?family=Crimson+Text");
+
 body
 {
 	text-align: center;
+	font-family: "Crimson Text", sans-serif;
+	font-size: 14pt;
 }
 
 #logo
 {
 	max-width: 100%;
+}
+
+#container
+{
+	display: table;
+}
+
+.pane
+{
+	width: 15%;
+	display: table-cell;
+	padding: 8px;
+}
+
+#youtube
+{
+	display: table-cell;
+	width: calc(55% - 48px);
+	height: calc(32vw - 48px);
+}
+
+.left
+{
+	float: left;
+}
+
+.right
+{
+	float: right;
+}
+
+#intro
+{
+	text-align: justify;
+}
+
+.fineprint
+{
+	color: #AAAAAA;
+	font-size: 8pt;
 }
 

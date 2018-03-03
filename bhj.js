@@ -14,3 +14,9 @@ function dosize(event)
 
 window.addEventListener("load", dosize, false);
 window.addEventListener("resize", dosize, false);
+
+function play(vid)
+{
+	document.getElementById("youtube").innerHTML = '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/' + vid + '?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+}
+
