@@ -7,9 +7,9 @@ catch (e)
 {
 }
 
-document.onload = function(event)
+window.addEventListener("load", function(event)
 {
 	top.postMessage(document.documentElement.clientHeight);
 	console.log("real page posted " + document.documentElement.clientHeight);
-};
+}, false);
 
