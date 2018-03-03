@@ -7,9 +7,10 @@ catch (e)
 {
 }
 
-window.addEventListener("load", function(event)
+function dosize(event)
 {
 	top.postMessage(document.documentElement.scrollHeight, "*");
-	console.log("real page posted " + document.documentElement.scrollHeight);
-}, false);
+}
 
+window.addEventListener("load", dosize, false);
+window.addEventListener("resize", dosize, false);
