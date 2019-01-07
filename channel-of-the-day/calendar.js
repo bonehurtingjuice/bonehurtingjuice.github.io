@@ -119,7 +119,7 @@ function makecalendar(month)
 
 window.onload = function()
 {
-	const cotd = "http://home.exetel.com.au/declanhoare/channel-of-the-day/";
+	const cotd = "https://home.exetel.com.au/declanhoare/channel-of-the-day/";
 	var startdate = new Date("2018-11-15T09:08:00+11:00");
 	var xhr = new XMLHttpRequest();
 	document.getElementById("calendar").innerHTML = "Loading the calendar.";
