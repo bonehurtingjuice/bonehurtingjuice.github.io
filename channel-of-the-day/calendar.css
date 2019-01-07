@@ -1,0 +1,53 @@
+#chooser, table
+{
+	margin: auto;
+	max-width: 56em;
+}
+
+th, td
+{
+	border: 1px solid black;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 8em;
+	width: 8em;
+	min-width: 8em;
+}
+
+.overflow
+{
+	text-align: justify;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 8em;
+	max-height: 8em;
+}
+
+
+.black
+{
+	background-color: black;
+}
+
+#selected
+{
+	background-color: #DDD;
+}
+
+body
+{
+	text-align: center;
+}
+
+.left
+{
+	float: left;
+}
+
+.right
+{
+	float: right;
+}
+
+
+
