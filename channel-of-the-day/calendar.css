@@ -1,7 +1,7 @@
 #chooser, table
 {
 	margin: auto;
-	max-width: 56em;
+	max-width: 49em;
 }
 
 th, td
@@ -9,9 +9,9 @@ th, td
 	border: 1px solid black;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	max-width: 8em;
-	width: 8em;
-	min-width: 8em;
+	max-width: 7em;
+	width: 7em;
+	min-width: 7em;
 }
 
 .overflow
@@ -19,8 +19,8 @@ th, td
 	text-align: justify;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	height: 8em;
-	max-height: 8em;
+	height: 7em;
+	max-height: 7em;
 }
 
 
@@ -49,5 +49,8 @@ body
 	float: right;
 }
 
-
+p, h1
+{
+	margin: 0;
+}
 

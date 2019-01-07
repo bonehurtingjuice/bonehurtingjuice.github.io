@@ -1,6 +1,7 @@
 function tomonth(date)
 {
-	return new Date(date.getFullYear(), date.getMonth());
+	var res = new Date(date.getFullYear(), date.getMonth(), 01, 00, -new Date().getTimezoneOffset());
+	return res;
 }
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -60,14 +61,16 @@ function makecalendar(month)
 		var div = document.createElement("div");
 		div.className = "overflow";
 		div.innerHTML = "<strong>" + date.getDate().toString() + "</strong><br />" + chnltext;
+		div.id = date.toISOString().substring(8, 10);
 		td.appendChild(div);
 		td.onclick = ((e, t, d) => (() =>
 		{
-			expand.innerHTML = t;
+			expand.innerHTML = "<strong>" + d.toDateString() + "</strong><br />" + chnltext;
 			var selected = document.getElementById("selected");
 			if (selected) selected.id = "";
 			e.id = "selected";
-		}))(td, "<strong>" + date.toDateString() + "</strong> " + chnltext);
+			location.hash = "#" + d.toISOString().substring(0, 10);
+		}))(td, chnltext, new Date(date));
 		tr.appendChild(td);
 		date.setDate(date.getDate() + 1);
 		i++;
@@ -98,22 +101,24 @@ function makecalendar(month)
 	var fwdmonth = new Date(month);
 	fwdmonth.setMonth(fwdmonth.getMonth() + 1);
 	
+	function move(dest)
+	{
+		return function()
+		{
+			location.hash = "#" + dest.toISOString().substring(0, 7);
+			makecalendar(dest);
+		}
+	}
 	var back = document.createElement("button");
 	back.className = "left";
 	back.innerHTML = "&lt;";
-	back.onclick = function()
-	{
-		makecalendar(backmonth);
-	};
+	back.onclick = move(backmonth);
 	chooser.appendChild(back);
 	
 	var fwd = document.createElement("button");
 	fwd.className = "right";
 	fwd.innerHTML = "&gt;";
-	fwd.onclick = function()
-	{
-		makecalendar(fwdmonth);
-	};
+	fwd.onclick = move(fwdmonth);
 	chooser.appendChild(fwd);
 }
 
@@ -142,7 +147,19 @@ window.onload = function()
 		}
 		
 		console.log(schedule);
-		makecalendar(tomonth(new Date()));
+		
+		var loaddate;
+		if (location.hash === "")
+			loaddate = new Date();
+		else
+			loaddate = new Date(location.hash.substring(1));
+		makecalendar(tomonth(new Date(loaddate)));
+		var split = location.hash.split("-");
+		if (split.length === 3)
+		{
+			console.log(split[2]);
+			document.getElementById(split[2]).click();
+		}
 	}
 	xhr.open("GET", cotd, true);
 	xhr.send();
