@@ -1,6 +1,6 @@
 function tomonth(date)
 {
-	var res = new Date(date.getFullYear(), date.getMonth(), 01);
+	var res = new Date(date.getFullYear(), date.getMonth(), 01, 00, -new Date().getTimezoneOffset());
 	return res;
 }
 
@@ -61,7 +61,7 @@ function makecalendar(month)
 		var div = document.createElement("div");
 		div.className = "overflow";
 		div.innerHTML = "<strong>" + date.getDate().toString() + "</strong><br />" + chnltext;
-		div.id = date.toISOString().substring(0, 10);
+		div.id = date.toISOString().substring(8, 10);
 		td.appendChild(div);
 		td.onclick = ((e, t, d) => (() =>
 		{
@@ -125,7 +125,7 @@ function makecalendar(month)
 window.onload = function()
 {
 	const cotd = "https://home.exetel.com.au/declanhoare/channel-of-the-day/";
-	var startdate = new Date(2018, 10, 15);
+	var startdate = new Date(2018, 10, 15, 00, -new Date().getTimezoneOffset());
 	var xhr = new XMLHttpRequest();
 	document.getElementById("calendar").innerHTML = "Loading the calendar.";
 	
