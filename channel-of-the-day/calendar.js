@@ -1,6 +1,6 @@
 function tomonth(date)
 {
-	var res = new Date(date.getFullYear(), date.getMonth(), 01, 00, -new Date().getTimezoneOffset());
+	var res = new Date(date.getFullYear(), date.getMonth());
 	return res;
 }
 
@@ -15,6 +15,16 @@ function strmonth(date)
 function intmonth(date)
 {
 	return date.getMonth() + 12 * date.getYear();
+}
+
+function hashlist(l)
+{
+	for (let i = 0; i < l.length; i++)
+	{
+		if (l[i] < 10)
+			l[i] = "0" + l[i].toString();
+	}
+	return "#" + l.join("-");
 }
 
 var schedule = {};
@@ -61,7 +71,7 @@ function makecalendar(month)
 		var div = document.createElement("div");
 		div.className = "overflow";
 		div.innerHTML = "<strong>" + date.getDate().toString() + "</strong><br />" + chnltext;
-		div.id = date.toISOString().substring(8, 10);
+		div.id = date.getDate().toString();
 		td.appendChild(div);
 		td.onclick = ((e, t, d) => (() =>
 		{
@@ -69,7 +79,7 @@ function makecalendar(month)
 			var selected = document.getElementById("selected");
 			if (selected) selected.id = "";
 			e.id = "selected";
-			location.hash = "#" + d.toISOString().substring(0, 10);
+			location.hash = hashlist([d.getFullYear(), d.getMonth() + 1, d.getDate()]);
 		}))(td, chnltext, new Date(date));
 		tr.appendChild(td);
 		date.setDate(date.getDate() + 1);
@@ -105,7 +115,7 @@ function makecalendar(month)
 	{
 		return function()
 		{
-			location.hash = "#" + dest.toISOString().substring(0, 7);
+			location.hash = hashlist([dest.getFullYear(), dest.getMonth() + 1]);
 			makecalendar(dest);
 		}
 	}
@@ -125,7 +135,7 @@ function makecalendar(month)
 window.onload = function()
 {
 	const cotd = "https://home.exetel.com.au/declanhoare/channel-of-the-day/";
-	var startdate = new Date(2018, 10, 15, 00, -new Date().getTimezoneOffset());
+	var startdate = new Date(2018, 10, 15);
 	var xhr = new XMLHttpRequest();
 	document.getElementById("calendar").innerHTML = "Loading the calendar.";
 	
@@ -148,17 +158,16 @@ window.onload = function()
 		
 		console.log(schedule);
 		
-		var loaddate;
-		if (location.hash === "")
+		var split = location.hash.substring(1).split("-"), loaddate;
+		if (split.length === 1)
 			loaddate = new Date();
 		else
-			loaddate = new Date(location.hash.substring(1));
-		makecalendar(tomonth(new Date(loaddate)));
-		var split = location.hash.split("-");
+			loaddate = new Date(parseInt(split[0]), parseInt(split[1]) - 1);
+		makecalendar(tomonth(loaddate));
 		if (split.length === 3)
 		{
 			console.log(split[2]);
-			document.getElementById(split[2]).click();
+			document.getElementById(parseInt(split[2])).click();
 		}
 	}
 	xhr.open("GET", cotd, true);
